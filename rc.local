@@ -1,0 +1,17 @@
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+exit 0
+sudo iptables -t nat -A POSTROUTING -o enx001e0636b03c -j MASQUERADE
+sudo iptables -A FORWARD -i enx001e0636b03c -o wlx200bd04dc738 -m state --state RELATED,ESTABLISHED -j ACCEPT
+sudo iptables -A FORWARD -i wlx200bd04dc738 -o enx001e0636b03c -j ACCEPT
